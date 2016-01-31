@@ -1,0 +1,1 @@
+Maybe restructure the folder stuff to not be file type organized like js or css folders.

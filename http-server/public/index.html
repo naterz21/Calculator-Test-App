@@ -1,0 +1,46 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+    body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+    </style>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="components/calculator.css">
+</head>
+
+<body ng-app="mainCalcApp">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Hello, below is a caclulator!</h1>
+            <p>This is a simple bootstrap shell and an angular app because the calculator app is a self contained angular module that can be added to any angular application</p>
+        </div>
+    </div>
+    <div class="container" ng-controller="mainCalcAppController">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <calculator></calculator>
+            </div>
+        </div>
+        <hr>
+        <footer>
+            <p>Calculator 2015</p>
+        </footer>
+    </div>
+    <script src="vendor/angular.min.js"></script>
+    <script src="main.js"></script>
+    <script src="components/calculator.js"></script>
+</body>
+
+</html>

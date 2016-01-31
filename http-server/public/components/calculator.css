@@ -1,0 +1,27 @@
+.calc-keyboard button, .calc-input {
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.calc-section button {
+    width: 3.2rem;
+    padding: .5rem;
+}
+
+.calc-section button:hover, .calc-equal:hover {
+    background: #428BCA;;
+}
+
+.calc-container {
+    width: 14rem;
+}
+
+.calc-input {
+    width: 100%;
+    line-height: 3.6rem;
+    padding-left: .5rem;
+}
+
+.calc-equal {
+    width: 100%;
+}

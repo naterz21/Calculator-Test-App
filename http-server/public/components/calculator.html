@@ -1,0 +1,30 @@
+<section class="calc-container">
+    <input class="calc-input" ng-model="vm.calcData.value" type="text" aria-label="Calculator Output" name="" placeholder="Calculator" readonly>
+    <section class="calc-keyboard">
+        <div class="calc-section">
+            <button ng-click="vm.handleNumberKeyClick('7')">7</button>
+            <button ng-click="vm.handleNumberKeyClick('8')">8</button>
+            <button ng-click="vm.handleNumberKeyClick('9')">9</button>
+            <button ng-click="vm.handleOperatorClick('/')">/</button>
+        </div>
+        <div class="calc-section">
+            <button type="button" ng-click="vm.handleNumberKeyClick('4')">4</button>
+            <button ng-click="vm.handleNumberKeyClick('5')">5</button>
+            <button ng-click="vm.handleNumberKeyClick('6')">6</button>
+            <button ng-click="vm.handleOperatorClick('*')">*</button>
+        </div>
+        <div class="calc-section">
+            <button ng-click="vm.handleNumberKeyClick('1')">1</button>
+            <button ng-click="vm.handleNumberKeyClick('2')">2</button>
+            <button ng-click="vm.handleNumberKeyClick('3')">3</button>
+            <button ng-click="vm.handleOperatorClick('-')">-</button>
+        </div>
+        <div class="calc-section">
+            <button ng-click="vm.handleNumberKeyClick('0')">0</button>
+            <button ng-click="vm.handleNumberKeyClick('.')">.</button>
+            <button ng-click="vm.handleResetClick()">C</button>
+            <button ng-click="vm.handleOperatorClick('+')">+</button>
+        </div>
+        <button class="calc-equal" ng-click="vm.handleOperatorClick('=')">=</button>
+    </section>
+</section>
