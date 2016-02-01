@@ -1,3 +1,7 @@
+/**
+ * I usually use sass but I didn't want the overhead for such a small component. 
+ */
+
 .calc-keyboard button, .calc-input {
     font-weight: bold;
     font-size: 1.8rem;
@@ -8,7 +12,7 @@
     padding: .5rem;
 }
 
-.calc-section button:hover, .calc-equal:hover {
+.calc-section button:hover, .calc-equal:hover, .calc-clear:hover {
     background: #428BCA;;
 }
 
@@ -22,6 +26,6 @@
     padding-left: .5rem;
 }
 
-.calc-equal {
-    width: 100%;
+.calc-equal, .calc-clear {
+    width: 48.5%;
 }

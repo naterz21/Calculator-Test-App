@@ -12,8 +12,9 @@
      */
     function calculator() {
         var directive = {
+
             restrict: 'E',
-            templateUrl: 'components/calculator.html',
+            templateUrl: 'components/calculator/calculator.html',
             link: calcuatorLink,
             controller: calculatorController,
             controllerAs: 'vm',
@@ -21,7 +22,13 @@
 
         };
         return directive;
-
+        /**
+         * This function binds the numberpad to the keys on the calculator.
+         * @param   scope      
+         * @param   element    
+         * @param   attribute  
+         * @param   controller 
+         */
         function calcuatorLink(scope, element, attribute, controller) {
             //Numpad key bindings
             var num0 = 96;
@@ -42,81 +49,78 @@
             var decimalKey = 110;
             var divideKey = 111;
 
-
-
-
-            angular.element($window).bind('keydown keypress', function(event) {
+            element.bind('keydown keypress', function(event) {
                 switch (event.which) {
                     case enterKey:
                         event.preventDefault();
-                        controller.handleOperatorClick('=');
+                        scope.$apply(controller.handleOperatorClick('='));
                         break;
 
                     case multiplyKey:
                         event.preventDefault();
-                        controller.handleOperatorClick('*');
+                        scope.$apply(controller.handleOperatorClick('*'));
                         break;
 
 
                     case addKey:
                         event.preventDefault();
-                        controller.handleOperatorClick('+');
+                        scope.$apply(controller.handleOperatorClick('+'));
                         break;
 
                     case subtractKey:
                         event.preventDefault();
-                        controller.handleOperatorClick('-');
+                        scope.$apply(controller.handleOperatorClick('-'));
                         break;
 
 
                     case divideKey:
                         event.preventDefault();
-                        controller.handleOperatorClick('/');
+                        scope.$apply(controller.handleOperatorClick('/'));
                         break;
 
                     case decimalKey:
                         event.preventDefault();
-                        controller.handleNumberKeyClick('.');
+                        scope.$apply(controller.handleNumberKeyClick('.'));
                         break;
                         
                     case num0:
-                        controller.handleNumberKeyClick('0')
+                        scope.$apply(controller.handleNumberKeyClick('0'));
                         break;
 
                     case num1:
-                        controller.handleNumberKeyClick('1')
+                        scope.$apply(controller.handleNumberKeyClick('1'));
                         break;
 
                     case num2:
-                        controller.handleNumberKeyClick('2')
+                        scope.$apply(controller.handleNumberKeyClick('2'));
                         break;
 
                     case num3:
-                        controller.handleNumberKeyClick('3')
+                        scope.$apply(controller.handleNumberKeyClick('3'));
                         break;
 
                     case num4:
-                        controller.handleNumberKeyClick('4')
+                        scope.$apply(controller.handleNumberKeyClick('4'));
                         break;
 
                     case num5:
-                        controller.handleNumberKeyClick('5')
+                        scope.$apply(controller.handleNumberKeyClick('5'));
                         break;
 
                     case num6:
-                        controller.handleNumberKeyClick('6')
+                        scope.$apply(controller.handleNumberKeyClick('6'));
                         break;
 
                     case num7:
-                        controller.handleNumberKeyClick('7')
+                        scope.$apply(controller.handleNumberKeyClick('7'));
                         break;
 
                     case num8:
-                        controller.handleNumberKeyClick('8')
+                        scope.$apply(controller.handleNumberKeyClick('8'));
                         break;
 
                     case num9:
-                        controller.handleNumberKeyClick('9')
+                        scope.$apply(controller.handleNumberKeyClick('9'));
                         break;
 
                 }
@@ -124,15 +128,22 @@
         }
     }
 
-    calculatorController.$inject = ['calculatorService', '$window'];
-
-    function calculatorController(calculatorService, $window) {
+    calculatorController.$inject = ['calculatorService'];
+    /**
+     * Directive Controller
+     * @param  {Service} calculatorService   This holds the main logic of the calcuator and shared variables 
+     */
+    function calculatorController(calculatorService) {
+        //vm = view model
         var vm = this;
         vm.calcData = {
             value: ""
         };
+
+        //Used to have these by dynamic on the template. However the way it was laid out decided against it
         vm.buttons = ['0', '.', '=', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
         vm.operators = ['+', '-', '/', '*'];
+
         vm.calculatorService = calculatorService;
 
         vm.handleNumberKeyClick = function(button) {
@@ -150,9 +161,12 @@
                 vm.calculatorService.secondCalcValue = vm.calcData.value;
                 vm.calculatorService.computeValue(vm.calcData);
                 vm.calculatorService.initialCalcValue = null;
+            } else if(operator === 'sqrt') {
+                vm.calculatorService.currentOperator = operator;
+                vm.calculatorService.computeValue(vm.calcData);
             } else {
                 vm.calculatorService.currentOperator = operator;
-                vm.calculatorService.handleOperator(vm.calcData);
+                vm.calculatorService.handleCoreOperators(vm.calcData);
             }
         }
 
@@ -162,14 +176,16 @@
     }
 
     calculatorService.$inject = [];
-
+    /**
+     * This holds the main logic for the calculator and the variables that are shared.
+     */
     function calculatorService() {
         this.initialCalcValue = null;
         this.secondCalcValue = null;
         this.currentOperator = null;
         this.computedValue = null;
 
-        this.handleOperator = function(currentCalc) {
+        this.handleCoreOperators = function(currentCalc) {
             if (currentCalc.value === '') {
                 this.initialCalcValue = '';
             } else if (this.initialCalcValue === null) {
@@ -198,6 +214,10 @@
                 case '/':
                     this.computedValue = Number(this.initialCalcValue) / Number(this.secondCalcValue);
                     break;
+
+                case 'sqrt':
+                    this.computedValue = Math.sqrt(Number(calcData.value));
+                break;
             }
             if (this.computedValue !== null) {
                 calcData.value = this.computedValue.toString();

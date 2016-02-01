@@ -22,9 +22,11 @@
         <div class="calc-section">
             <button ng-click="vm.handleNumberKeyClick('0')">0</button>
             <button ng-click="vm.handleNumberKeyClick('.')">.</button>
-            <button ng-click="vm.handleResetClick()">C</button>
+            <button ng-click="vm.handleOperatorClick('sqrt')">&#x221a;</button>
             <button ng-click="vm.handleOperatorClick('+')">+</button>
         </div>
+        <button class="calc-clear" ng-click="vm.handleResetClick()">C</button>
         <button class="calc-equal" ng-click="vm.handleOperatorClick('=')">=</button>
+        
     </section>
 </section>

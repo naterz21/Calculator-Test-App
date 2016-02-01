@@ -19,6 +19,9 @@
 
     mainCalcAppController.$inject = [];
 
+    /**
+     * The main controller. Nothing is in it now, but just in case. 
+     */
     function mainCalcAppController() {
 
     }
